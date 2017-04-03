@@ -4,10 +4,6 @@
 Our project aims to allow the user to input basic food items they have around and have a recipe generated out of those ingredients. The recipe will be random each time with a link provided to the recipe.
 
 ### Analysis
-Explain what approaches from class you will bring to bear on the project.
-
-Be explicit about the techiques from the class that you will use. For example:
-
 - We will use recursion to parse the JSON to find recipes that best fit the users needs.
 - map/filter/reduce will be used to further cut down our list of recipes as needed. 
 - We will have seperate functions to request, parse, and display data. It makes for cleaner and scalable code.
