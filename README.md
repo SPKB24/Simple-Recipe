@@ -1,7 +1,7 @@
 # Simple-Recipe
 
 ### Statement
-Our project aims to allow the user to input basic food items they have lying around and create a recipe out of them. The recipe will be randomly generated and will provide a link to the recipe.
+Our project aims to allow the user to input basic food items they have around and have a recipe generated out of them. The recipe will be random each time and the UI will provide a link to the recipe.
 
 ### Analysis
 Explain what approaches from class you will bring to bear on the project.
@@ -31,7 +31,7 @@ You are encouraged to develop a project that connects to external systems. For e
 For our data sets we plan to use walmarts api and/or openfoodfacts data.
 - https://developer.walmartlabs.com/docs/read/JSONP_Response
 - https://world.openfoodfacts.org/data
-Using this data we will be able to provide more diverse options for the user. Using these dats sets will make the project way more interesting for the user.
+Using this data we will be able to provide more diverse options for the user. These data sets will help provide the user with a more diverse recipe list and make our lives easier. 
 
 ### Deliverable and Demonstration
 Explain exactly what you'll have at the end. What will it be able to do at the live demo?
@@ -43,7 +43,10 @@ Will it run on some data, like batch mode? Will you present some analytical resu
 Will it be interactive? Can you show it working? This project involves a live demo, so interactivity is good.
 
 ### Evaluation of Results
-- If we are able to successfully give the user back a recipe from their input, then we will be successfull.
+If we can provide these functions for the user, then we will be successful: 
+- Allow the user to input food items
+- Provide the user with a unique recipe each time
+- Easy to understand UI
 
 ## Architecture Diagram
 Upload the architecture diagram you made for your slide presentation to your repository, and include it in-line here.
@@ -51,16 +54,6 @@ Upload the architecture diagram you made for your slide presentation to your rep
 Create several paragraphs of narrative to explain the pieces and how they interoperate.
 
 ## Schedule
-Explain how you will go from proposal to finished product. 
-
-There are three deliverable milestones to explicitly define, below.
-
-The nature of deliverables depend on your project, but may include things like processed data ready for import, core algorithms implemented, interface design prototyped, etc. 
-
-You will be expected to turn in code, documentation, and data (as appropriate) at each of these stages.
-
-Write concrete steps for your schedule to move from concept to working system. 
-
 ### First Milestone (Sun Apr 9)
 Which portion of the work will be completed (and committed to Github) by this day? 
 - Basic functionality.
@@ -69,7 +62,7 @@ Which portion of the work will be completed (and committed to Github) by this da
 ### Second Milestone (Sun Apr 16)
 Which portion of the work will be completed (and committed to Github) by this day?
 - UI work
-- -Basically our goal is to finish up the UI and make it look pretty. Along with this, we hope to finish up any other remaining tasks.
+- - Basically our goal is to finish up the UI and make it look pretty. Alongside with this, we hope to finish up any other remaining tasks.
 
 ### Public Presentation (Mon Apr 24, Wed Apr 26, or Fri Apr 28 [your date to be determined later])
 - 
@@ -80,8 +73,9 @@ Here each group member gets a section where they, as an individual, detail what 
 Please use Github properly: each individual must make the edits to this file representing their own section of work.
 
 - Mike Zurawski
-- -Basic UI work
-- -Parsing JSON
+- - Basic UI work
+- - Parsing JSON for retrieve food items
+- - Other miscellaneous tasks
 
 **Additional instructions for teams of three:** 
 * Remember that you must have prior written permission to work in groups of three (specifically, an approved `FP3` team declaration submission).
