@@ -30,16 +30,15 @@ You are encouraged to develop a project that connects to external systems. For e
 ### Data Sets or other Source Materials
 For our data set we plan to use yummly. 
 - https://developer.yummly.com/documentation
-Using this data we will be able to provide more options for the user. This data sets will help provide the user with a more diverse recipe list and make our lives easier. 
+Using this data we will be able to provide more options for the user. This data will help provide the user with a more diverse recipe list and make our lives easier. 
 
 ### Deliverable and Demonstration
 Explain exactly what you'll have at the end. What will it be able to do at the live demo?
-
 What exactly will you produce at the end of the project? A piece of software, yes, but what will it do? Here are some questions to think about (and answer depending on your application).
-
 Will it run on some data, like batch mode? Will you present some analytical results of the processing? How can it be re-run on different source data?
-
 Will it be interactive? Can you show it working? This project involves a live demo, so interactivity is good.
+
+Upon completion of the project we should be able to give a live demo of it. To be more explicit, the final product will allow the user to input food items they have in a simple GUI. After that, they will click a button and get a random recipe that includes the ingredients they entered. This will also come with a link to the website that contains the recipe. During the live demo, people will be able to come up if they like to try it out.
 
 ### Evaluation of Results
 If we can provide these functions for the user, then we will be successful: 
@@ -68,6 +67,6 @@ Which portion of the work will be completed (and committed to Github) by this da
 
 ## Group Responsibilities
 ### Mike Zurawski @MikeZurawski
-- - Basic UI work
-- - Parsing JSON for retrieve food items
-- - Other miscellaneous tasks
+- Basic UI work
+- Parsing JSON for retrieve food items
+- Other miscellaneous tasks
