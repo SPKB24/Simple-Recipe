@@ -1,7 +1,7 @@
-# Project Title Goes Here (10 words maximum)
+# Simple-Recipe
 
 ### Statement
-Describe your project. Why is it interesting? Why is it interesting to you personally? What do you hope to learn? 
+Our project aims to allow the user to input basic food items they have lying around and create a recipe out of them. The recipe will be randomly generated and will provide a link to the recipe.
 
 ### Analysis
 Explain what approaches from class you will bring to bear on the project.
@@ -23,22 +23,15 @@ The idea here is to identify what ideas from the class you will use in carrying 
 
 ### External Technologies
 You are encouraged to develop a project that connects to external systems. For example, this includes systems that:
-
-- retrieve information or publish data to the web
-- generate or process sound
-- control robots or other physical systems
-- interact with databases
-
-If your project will do anything in this category (not only the things listed above!), include this section and discuss.
+- We plan to use walmart's api to look up foods https://developer.walmartlabs.com/docs/read/JSONP_Response
+- Racket GUI library. Will be used to display information to user.
+- Racket JSON library. Will be used to get information from data sets.
 
 ### Data Sets or other Source Materials
-If you will be working with existing data, where will you get those data from? (Dowload from a website? Access in a database? Create in a simulation you will build? ...)
-
-How will you convert your data into a form usable for your project?  
-
-If you are pulling data from somewhere, actually go download it and look at it before writing the proposal. Explain in some detail what your plan is for accomplishing the necessary processing.
-
-If you are using some other starting materials, explain what they are. Basically: anything you plan to use that isn't code.
+For our data sets we plan to use walmarts api and/or openfoodfacts data.
+- https://developer.walmartlabs.com/docs/read/JSONP_Response
+- https://world.openfoodfacts.org/data
+Using this data we will be able to provide more diverse options for the user. Using these dats sets will make the project way more interesting for the user.
 
 ### Deliverable and Demonstration
 Explain exactly what you'll have at the end. What will it be able to do at the live demo?
@@ -50,8 +43,7 @@ Will it run on some data, like batch mode? Will you present some analytical resu
 Will it be interactive? Can you show it working? This project involves a live demo, so interactivity is good.
 
 ### Evaluation of Results
-How will you know if you are successful? 
-If you include some kind of _quantitative analysis,_ that would be good.
+- If we are able to successfully give the user back a recipe from their input, then we will be successfull.
 
 ## Architecture Diagram
 Upload the architecture diagram you made for your slide presentation to your repository, and include it in-line here.
@@ -71,17 +63,25 @@ Write concrete steps for your schedule to move from concept to working system.
 
 ### First Milestone (Sun Apr 9)
 Which portion of the work will be completed (and committed to Github) by this day? 
+- Basic functionality.
+- - Our hope is to allow the user to enter food items and have a recipe displayed.
 
 ### Second Milestone (Sun Apr 16)
-Which portion of the work will be completed (and committed to Github) by this day?  
+Which portion of the work will be completed (and committed to Github) by this day?
+- UI work
+- -Basically our goal is to finish up the UI and make it look pretty. Along with this, we hope to finish up any other remaining tasks.
 
 ### Public Presentation (Mon Apr 24, Wed Apr 26, or Fri Apr 28 [your date to be determined later])
-What additionally will be completed before the public presentation?
+- 
 
 ## Group Responsibilities
 Here each group member gets a section where they, as an individual, detail what they are responsible for in this project. Each group member writes their own Responsibility section. Include the milestones and final deliverable.
 
 Please use Github properly: each individual must make the edits to this file representing their own section of work.
+
+- Mike Zurawski
+- -Basic UI work
+- -Parsing JSON
 
 **Additional instructions for teams of three:** 
 * Remember that you must have prior written permission to work in groups of three (specifically, an approved `FP3` team declaration submission).
