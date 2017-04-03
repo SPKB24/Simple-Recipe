@@ -1,7 +1,7 @@
 # Simple-Recipe
 
 ### Statement
-Our project aims to allow the user to input basic food items they have around and have a recipe generated out of them. The recipe will be random each time and the UI will provide a link to the recipe.
+Our project aims to allow the user to input basic food items they have around and have a recipe generated out of those ingredients. The recipe will be random each time with a link provided to the recipe.
 
 ### Analysis
 Explain what approaches from class you will bring to bear on the project.
