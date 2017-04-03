@@ -8,18 +8,9 @@ Explain what approaches from class you will bring to bear on the project.
 
 Be explicit about the techiques from the class that you will use. For example:
 
-- Will you use data abstraction? How?
-- Will you use recursion? How?
-- Will you use map/filter/reduce? How? 
-- Will you use object-orientation? How?
-- Will you use functional approaches to processing your data? How?
-- Will you use state-modification approaches? How? (If so, this should be encapsulated within objects. `set!` pretty much should only exist inside an object.)
-- Will you build an expression evaluator, like we did in the symbolic differentatior and the metacircular evaluator?
-- Will you use lazy evaluation approaches?
-
-The idea here is to identify what ideas from the class you will use in carrying out your project. 
-
-**Your project will be graded, in part, by the extent to which you adopt approaches from the course into your implementation, _and_ your discussion about this.**
+- We will use recursion to parse the JSON to find recipes that best fit the users needs.
+- map/filter/reduce will be used to further cut down our list of recipes as needed. 
+- We will have seperate functions to request, parse, and display data. It makes for cleaner and scalable code.
 
 ### External Technologies
 You are encouraged to develop a project that connects to external systems. For example, this includes systems that:
@@ -42,26 +33,33 @@ If we can provide these functions for the user, then we will be successful:
 - Easy to understand UI
 
 ## Architecture Diagram
-Upload the architecture diagram you made for your slide presentation to your repository, and include it in-line here.
+![Architecture Diagram image](/ArchitectureDiagram.png?raw=true "Architecture Diagram image")
 
-Create several paragraphs of narrative to explain the pieces and how they interoperate.
+The first step will be the user entering in individual ingredients that they have at their disposal. They will also enter items that they would like to blacklist. This could be anything from foods that they are allergic too, or simply don't like to eat. We will use the racket/gui library to create an easy to use GUI for users to enter the information.
+
+Once they have filled in the necessary information, we will make an API call to Yummly (using net/url) requesting a JSON file with recipes that best include the inputted ingredients. We will further parse the list to remove any recipes that have items from your blacklist. To handle JSON file parsing, we will use the JSON library.
+
+One we have our final recipes, we will once again use racket/gui to display them for users to choose from.
 
 ## Schedule
 ### First Milestone (Sun Apr 9)
-Which portion of the work will be completed (and committed to Github) by this day? 
-- Basic functionality.
-- - Our hope is to allow the user to enter food items and have a recipe displayed.
+- We want to focus on being able to pull down recipes from Yummly, and begin to parse them.
+- Time permitted, we will also begin to work on the GUI.
 
 ### Second Milestone (Sun Apr 16)
 Which portion of the work will be completed (and committed to Github) by this day?
-- UI work
-- - Basically our goal is to finish up the UI and make it look pretty. Alongside with this, we hope to finish up any other remaining tasks.
+- We will work on our GUI. More specifically, we will let users enter their ingredients and blacklist ingredients, and use those to further parse the JSON.
+- We will also display the parsed items in our GUI.
 
 ### Public Presentation (Mon Apr 24, Wed Apr 26, or Fri Apr 28 [your date to be determined later])
-- 
+- At this point we would like to have a clean and easy to use GUI for users to use. We want this to be a painless process for people to find recipes that fit their needs.
 
 ## Group Responsibilities
 ### Mike Zurawski @MikeZurawski
 - Basic UI work
 - Parsing JSON for retrieve food items
 - Other miscellaneous tasks
+
+### Sohit Pal @SPKB24
+- Setup GUI
+- Help with handling API call to Yummly and parsing the resulting JSON
