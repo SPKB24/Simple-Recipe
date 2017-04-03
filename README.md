@@ -33,11 +33,6 @@ For our data set we plan to use yummly.
 Using this data we will be able to provide more options for the user. This data will help provide the user with a more diverse recipe list and make our lives easier. 
 
 ### Deliverable and Demonstration
-Explain exactly what you'll have at the end. What will it be able to do at the live demo?
-What exactly will you produce at the end of the project? A piece of software, yes, but what will it do? Here are some questions to think about (and answer depending on your application).
-Will it run on some data, like batch mode? Will you present some analytical results of the processing? How can it be re-run on different source data?
-Will it be interactive? Can you show it working? This project involves a live demo, so interactivity is good.
-
 Upon completion of the project we should be able to give a live demo of it. To be more explicit, the final product will allow the user to input food items they have in a simple GUI. After that, they will click a button and get a random recipe that includes the ingredients they entered. This will also come with a link to the website that contains the recipe. During the live demo, people will be able to come up if they like to try it out.
 
 ### Evaluation of Results
