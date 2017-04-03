@@ -23,15 +23,14 @@ The idea here is to identify what ideas from the class you will use in carrying 
 
 ### External Technologies
 You are encouraged to develop a project that connects to external systems. For example, this includes systems that:
-- We plan to use walmart's api to look up foods https://developer.walmartlabs.com/docs/read/JSONP_Response
+- We plan to use yummly's api to look up foods https://developer.yummly.com/documentation
 - Racket GUI library. Will be used to display information to user.
 - Racket JSON library. Will be used to get information from data sets.
 
 ### Data Sets or other Source Materials
-For our data sets we plan to use walmarts api and/or openfoodfacts data.
-- https://developer.walmartlabs.com/docs/read/JSONP_Response
-- https://world.openfoodfacts.org/data
-Using this data we will be able to provide more diverse options for the user. These data sets will help provide the user with a more diverse recipe list and make our lives easier. 
+For our data set we plan to use yummly. 
+- https://developer.yummly.com/documentation
+Using this data we will be able to provide more options for the user. This data sets will help provide the user with a more diverse recipe list and make our lives easier. 
 
 ### Deliverable and Demonstration
 Explain exactly what you'll have at the end. What will it be able to do at the live demo?
