@@ -5,6 +5,8 @@
 (require net/url)
 (require json)
 
+(provide yummlyURL add-ingredients getRecipes)
+
 (define yummlyURL (string-append "http://api.yummly.com/v1/api/recipes?_app_id=" appID "&_app_key=" appKey "&q="))
 
 ;; add-ingredients will take a list of strings to parse and add to the API call url
@@ -27,3 +29,6 @@
   (define response-string (port->string in))
   (close-input-port in)
   (printf response-string))
+
+
+
