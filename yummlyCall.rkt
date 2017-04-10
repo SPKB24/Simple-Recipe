@@ -20,6 +20,17 @@
             (set! yummlyURL (string-append yummlyURL (car ingredients) "+")))
         (add-ingredients (cdr ingredients)))))
 
+;; addToBlacklist will take a list of strings to parse and add to the API call url
+;;   ex. (addToBlacklist (list "peanuts" "milk"))
+(define (addToBlacklist items)
+  (if (null? items)
+      yummlyURL
+      (begin
+        (if (null? (cdr items))
+            (set! yummlyURL (string-append yummlyURL (car items)))
+            (set! yummlyURL (string-append yummlyURL (car items) "+")))
+        (addToBlacklist (cdr items)))))
+
 ;; Once all information has been added from the GUI to the yummlyURL, call this procedure
 ;; to actually send out the API call.
 (define (getRecipes)
@@ -28,7 +39,20 @@
      (string->url yummlyURL)))
   (define response-string (port->string in))
   (close-input-port in)
-  (printf response-string))
+  (getRecipesList response-string))
 
+;; Once we have a JSON response, this procedure will parse the results and give us
+;; the information that we are looking for.
+(define (getRecipesList response)
+  ;; This next line should get a list of recipes, need to loop through them like nobody's biznes
+  (begin
+    (define recipes (hash-ref (string->jsexpr response) 'matches))
+    (printf (jsexpr->string recipes))
+    (hash-ref (cadr recipes) 'sourceDisplayName)))
 
-
+(define (parseRecipes recipes)
+  (if (null? recipes)
+      '()
+      (begin
+        (hash-ref (string->jsexpr (car recipes)) 'sourceDisplayName)
+        (parseRecipes (cdr recipes)))))
