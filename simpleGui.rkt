@@ -1,41 +1,87 @@
 #lang racket
 
+(require browser)
 (require racket/gui/base)
 (require "yummlyCall.rkt")
 
+(define pic (read-bitmap "macro_galaxy_by_zy0rg-360x240.jpg"))
+(define pic2 (read-bitmap "wallcoverings-projects-border-360x240.jpg"))
+
 (define frame (new frame% 
                   [label "Food Recipes"]
-                  [width 800]
-                  [height 600]
+                  [width 700]
+                  [height 1000]
                   ))
+(define panel
+  (new vertical-panel%
+       (parent frame)
+       [style (list 'vscroll)]
+       ))
+  
+; Title
+(define title
+  (new message%
+       (parent panel)
+       (label "Welcome to Simple Recipe")
+       (min-width 0)
+       (font (make-object font% 15 'default))))
 
-(define table (new list-box%
-                 [parent frame]
-                 [choices (list )]
-                 [label "Food"]
-                 [style (list 'single
-                              'column-headers
-                              'variable-columns)]
-                 [columns (list "Food Item 1"
-                                "Food Item 2"
-                                "Food Item 3"
-                                "Food Item 4"
-                                "Recipe Generated"
-                                "Link to Recipe")]))
+; Recipe name here
+(define recipe-name
+  (new message%
+       (parent panel)
+       (vert-margin 50)
+       (label "Recipe Name:")
+       (min-width 0)
+       (font (make-object font% 12 'default))))
 
-(define data (list (list "egg" "chicken" "bacon" "apple")
-                   (list "cheese" "garlic" "egg" "sugar")
-                   (list "ham" "x" "english muffin" "ground cinnamon")
-                   (list "x" "x" "x" "nutmeg")
-                   (list "Ham and cheese omelet" "Grilled chicken breast" "Bacon and egg sandwhich" "Apple pie") ;; recipe
-                   (list "http://www.food.com/recipe/ham-cheese-omelette-151744"
-                         "http://www.onceuponachef.com/recipes/perfectly-grilled-chicken-breasts.html"
-                         "http://www.food.com/recipe/bacon-and-egg-sandwich-56191"
-                         "https://www.pillsbury.com/recipes/perfect-apple-pie/1fc2b60f-0a4f-441e-ad93-8bbd00fe5334"))) ;; url
+; Required ingredients here
+(define recipe-required
+  (new message%
+       (parent panel)
+       (vert-margin 50)
+       (label "Required ingredients:")
+       (min-width 0)
+       (font (make-object font% 12 'default))))
+
+; Recipe picture here
+(define recipe-picture
+  (new message%
+       (parent panel)
+       (vert-margin 50)
+       (label "Sample picture:")
+       (min-width 0)
+       (font (make-object font% 12 'default))))
+
+(define display-picture
+  (new message%
+       (parent panel)
+       (label pic)))
+
+; Nutritional facts here
+(define recipe-macros
+  (new message%
+       (parent panel)
+       (vert-margin 50)
+       (label "Nutritional facts:")
+       (min-width 0)
+       (font (make-object font% 12 'default))))
+
+; Link to cooking instructions
+(define recipe-instructions
+  (new message%
+       (parent panel)
+       (vert-margin 50)
+       (label "Instructions URL:")
+       (min-width 0)
+       (font (make-object font% 12 'default))))
 
 
-(send table set (list-ref data 0) (list-ref data 1) (list-ref data 2) (list-ref data 3) (list-ref data 4)
-      (list-ref data 5))
+
+;(define castle-button
+ ; (new button%
+  ;     (parent pane1l)
+   ;    (label "Castle")))
 
 (define (getstr str)
   (printf str))
@@ -49,24 +95,26 @@
 
 ;;(define frame (new frame% [label "Frame"]))
 (define field-1 (new my-text-field% [label "Food Item 1"] [parent frame]))
-(define field-2 (new my-text-field% [label "Food Item 2"] [parent frame]))
-(define field-3 (new my-text-field% [label "Food Item 3"] [parent frame]))
-(define field-4 (new my-text-field% [label "Food Item 4"] [parent frame]))
+;(define field-2 (new my-text-field% [label "Food Item 2"] [parent frame]))
+;(define field-3 (new my-text-field% [label "Food Item 3"] [parent frame]))
+;(define field-4 (new my-text-field% [label "Food Item 4"] [parent frame]))
 (define field-5 (new my-text-field% [label "Recipe Link"] [parent frame]))
+(define field-6 (new message% [label "Recipe Link"] [parent frame]))
 
 ;; http://stackoverflow.com/questions/36879265/how-to-align-racket-gui-text-fields-and-buttons
 (define (callback button event)
   (define title-new-value (send field-1 get-value))
-  (define new-value (send field-2 get-value))
+  ;(define new-value (send field-2 get-value))
   (define userField1 (add-ingredients(list(string-append(send field-1 get-value)))))
-  (define userField2 (add-ingredients(list(string-append(send field-2 get-value)))))
-  (define userField3 (add-ingredients(list(string-append(send field-3 get-value)))))
-  (define userField4 (add-ingredients(list(string-append(send field-4 get-value)))))
-  (send field-1 set-value "")
-  (send field-2 set-value "")
-  (send field-3 set-value "")
-  (send field-4 set-value "")
-  (send field-5 set-value yummlyURL))
+  ;(define userField2 (add-ingredients(list(string-append(send field-2 get-value)))))
+  ;(define userField3 (add-ingredients(list(string-append(send field-3 get-value)))))
+  ;(define userField4 (add-ingredients(list(string-append(send field-4 get-value)))))
+  ;(send field-1 set-value "")
+  ;(send field-2 set-value "")
+  ;(send field-3 set-value "")
+  ;(send field-4 set-value "")
+  (send field-5 set-value yummlyURL)
+  (send display-picture set-label pic2))
 (define button
   (new button%
        [label "Submit"]
