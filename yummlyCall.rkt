@@ -5,7 +5,7 @@
 (require net/url)
 (require json)
 
-(provide yummlySearch add-ingredients getRecipes)
+(provide yummlySearch add-ingredients addToBlacklist getRecipes)
 
 ;; Search api: http://api.yummly.com/v1/api/recipes?_app_id=app-id&_app_key=app-key&your _search_parameters
 ;;    Get api: http://api.yummly.com/v1/api/recipe/recipe-id?_app_id=YOUR_ID&_app_key=YOUR_APP_KEY
