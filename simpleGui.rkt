@@ -113,7 +113,7 @@
   ;(send field-2 set-value "")
   ;(send field-3 set-value "")
   ;(send field-4 set-value "")
-  (send field-5 set-value yummlyURL)
+  (send field-5 set-value yummlySearch)
   (send display-picture set-label pic2))
 (define button
   (new button%
