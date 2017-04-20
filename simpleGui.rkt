@@ -7,7 +7,7 @@
          net/url)
 
 (define frame (new frame% 
-                  [label "Food Recipes"]
+                  [label "Simple Recipe"]
                   [width 700]
                   [height 1000]
                   ))
@@ -39,7 +39,7 @@
        (min-width 0)
        (vert-margin 8)
        (font (make-object font% 12 'default))))
-(define field-likes (new my-text-field% [label ""] [parent frame] [min-width 100] [min-height 100]))
+(define field-likes (new text-field% [label ""] [parent frame] [min-width 100] [min-height 100]))
 
 ; Enter food dislikes here
 (define recipe-food-dislike
@@ -50,7 +50,7 @@
        (min-width 0)
        (font (make-object font% 12 'default))))
 
-(define field-dislikes (new my-text-field% [label ""] [parent frame] [min-width 100] [min-height 100]))
+(define field-dislikes (new text-field% [label ""] [parent frame] [min-width 100] [min-height 100]))
 (define field-6 (new message% [label ""] [parent frame]))
 
 ;; http://stackoverflow.com/questions/36879265/how-to-align-racket-gui-text-fields-and-buttons
@@ -58,9 +58,12 @@
   (define title-new-value (send field-likes get-value))
   (define userLikes (add-ingredients(regexp-split #px", " (string-append(send field-likes get-value)))))
   (define userDislikes (addToBlacklist(regexp-split #px", " (string-append(send field-dislikes get-value)))))
-
   (send recipe-name set-label yummlySearch)
-  (send display-picture set-label logo))
+  (send display-picture set-label logo)
+  (send field-dislikes set-value "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\nddDD")
+  (send field-ingredients set-value "Ingredients\nhere")
+  (send field-nutritional-facts set-value "Facts\nhere")
+  (send field-url set-value "URL\nhere"))
 
 (define button
   (new button%
@@ -100,6 +103,8 @@
        (min-width 0)
        (font (make-object font% 12 'default))))
 
+(define field-ingredients (new text-field% [label ""] [parent panel] [min-width 100] [min-height 100]))
+
 ; Recipe picture here
 (define recipe-picture
   (new message%
@@ -109,7 +114,7 @@
        (min-width 0)
        (font (make-object font% 12 'default))))
 
-(define blank (read-bitmap (get-pure-port (string->url "http://www.google.com"))))
+(define blank (read-bitmap (get-pure-port (string->url "http://hipsterhub.com/wp-content/uploads/2011/05/blue-pattern-ipad-wallpaper-300x300.jpg"))))
 (define logo (read-bitmap (get-pure-port (string->url "http://racket-lang.org/logo.png"))))
 
 ;; Picture of recipe here
@@ -127,6 +132,8 @@
        (min-width 0)
        (font (make-object font% 12 'default))))
 
+(define field-nutritional-facts (new text-field% [label ""] [parent panel] [min-width 100] [min-height 100]))
+
 ; Link to cooking instructions
 (define recipe-instructions
   (new message%
@@ -135,6 +142,8 @@
        (label "Instructions URL:")
        (min-width 0)
        (font (make-object font% 12 'default))))
+
+(define field-url (new text-field% [label ""] [parent panel] [min-width 100] [min-height 100]))
 
 ;; display the GUI
 (send frame show #t)
