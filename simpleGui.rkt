@@ -58,12 +58,14 @@
   (define title-new-value (send field-likes get-value))
   (define userLikes (add-ingredients(regexp-split #px", " (string-append(send field-likes get-value)))))
   (define userDislikes (addToBlacklist(regexp-split #px", " (string-append(send field-dislikes get-value)))))
-  (send recipe-name set-label yummlySearch)
+  (printf userLikes)
+  (printf userDislikes)
+  getRecipes
+  (send recipe-name set-label (getRecipeAttribute 'recipeName))
   (send display-picture set-label logo)
-  (send field-dislikes set-value "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\nddDD")
-  (send field-ingredients set-value "Ingredients\nhere")
-  (send field-nutritional-facts set-value "Facts\nhere")
-  (send field-url set-value "URL\nhere"))
+  (send field-ingredients set-value "")
+  (send field-nutritional-facts set-value "")
+  (send field-url set-value ""))
 
 (define button
   (new button%
