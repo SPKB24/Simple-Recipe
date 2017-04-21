@@ -35,7 +35,7 @@
   (if (null? items)
       yummlySearch
       (begin
-        (when (not (and (null? (car items)) (= "" (car items))))
+        (when (not (and (null? (car items)) (eq? "" (car items))))
           (set! yummlySearch (string-append yummlySearch "&excludedIngredient[]=" (car items))))
         (addToBlacklist (cdr items)))))
 
