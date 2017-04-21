@@ -5,14 +5,17 @@
 (require net/url)
 (require json)
 
-(provide yummlySearch add-ingredients addToBlacklist getRecipes getRecipeAttribute)
+(provide yummlySearch counter reset-yummly add-ingredients addToBlacklist getRecipes getRecipeAttribute iterateCounter)
 
 ;; Search api: http://api.yummly.com/v1/api/recipes?_app_id=app-id&_app_key=app-key&your _search_parameters
 ;;    Get api: http://api.yummly.com/v1/api/recipe/recipe-id?_app_id=YOUR_ID&_app_key=YOUR_APP_KEY
 (define yummlyID (string-append "?_app_id=" appID "&_app_key=" appKey))
 (define yummlySearch (string-append "http://api.yummly.com/v1/api/recipes" yummlyID))
-(define counter 2)
+(define counter 1)
 (define workingRecipe "")
+
+(define (reset-yummly)
+  (set! yummlySearch (string-append "http://api.yummly.com/v1/api/recipes" yummlyID)))
 
 (define (iterateCounter)
   (if (= counter 10)
@@ -25,7 +28,7 @@
   (if (null? items)
       yummlySearch
       (begin
-        (when (not (or (null? (car items)) (eq? "" (car items))))
+        (when (not (or (null? (car items)) (equal? "" (car items))))
           (set! yummlySearch (string-append yummlySearch "&allowedIngredient[]=" (car items))))
         (add-ingredients (cdr items)))))
 
@@ -35,7 +38,7 @@
   (if (null? items)
       yummlySearch
       (begin
-        (when (not (and (null? (car items)) (eq? "" (car items))))
+        (when (not (and (null? (car items)) (equal? "" (car items))))
           (set! yummlySearch (string-append yummlySearch "&excludedIngredient[]=" (car items))))
         (addToBlacklist (cdr items)))))
 
@@ -61,7 +64,9 @@
 (define (getSingleRecipe recipes current)
   (if (= counter current)
      (set! workingRecipe (car recipes))
-     (getSingleRecipe (cdr recipes) (+ current 1))))
+     (if (null? (cdr recipes))
+         (getSingleRecipe recipes (counter))
+         (getSingleRecipe (cdr recipes) (+ current 1)))))
 
 (define (getRecipeAttribute attribute)
   (hash-ref workingRecipe attribute))
