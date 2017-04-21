@@ -5,6 +5,10 @@
 (require "yummlyCall.rkt")
 (require racket/draw
          net/url)
+(require net/sendurl)
+
+(define blank (read-bitmap (get-pure-port (string->url "http://hipsterhub.com/wp-content/uploads/2011/05/blue-pattern-ipad-wallpaper-300x300.jpg"))))
+(define logo (read-bitmap (get-pure-port (string->url "http://racket-lang.org/logo.png"))))
 
 (define frame (new frame% 
                   [label "Simple Recipe"]
@@ -39,7 +43,7 @@
        (min-width 0)
        (vert-margin 8)
        (font (make-object font% 12 'default))))
-(define field-likes (new text-field% [label ""] [parent frame] [min-width 100] [min-height 100]))
+(define field-likes (new text-field% [label ""] [parent frame] [min-width 60] [min-height 60]))
 
 ; Enter food dislikes here
 (define recipe-food-dislike
@@ -50,28 +54,37 @@
        (min-width 0)
        (font (make-object font% 12 'default))))
 
-(define field-dislikes (new text-field% [label ""] [parent frame] [min-width 100] [min-height 100]))
+(define field-dislikes (new text-field% [label ""] [parent frame] [min-width 60] [min-height 60]))
 (define field-6 (new message% [label ""] [parent frame]))
 
-;; http://stackoverflow.com/questions/36879265/how-to-align-racket-gui-text-fields-and-buttons
 (define (callback button event)
   (define title-new-value (send field-likes get-value))
-  (define userLikes (add-ingredients(regexp-split #px", " (string-append(send field-likes get-value)))))
-  (define userDislikes (addToBlacklist(regexp-split #px", " (string-append(send field-dislikes get-value)))))
-  (printf userLikes)
-  (printf userDislikes)
-  getRecipes
+  (when (not (equal? (car (regexp-split #px", " (string-append(send field-likes get-value)))) ""))
+      (add-ingredients(regexp-split #px", " (string-append(send field-likes get-value)))))
+  (when (not (equal? (car (regexp-split #px", " (string-append(send field-dislikes get-value)))) ""))
+      (addToBlacklist(regexp-split #px", " (string-append(send field-dislikes get-value)))))
+  (printf yummlySearch)
+  (printf "\n")
+  (printf (number->string counter))
+  (printf "\n")
+  (getRecipes)
+  ;(printf (getRecipeAttribute 'recipeName)))
   (send recipe-name set-label (getRecipeAttribute 'recipeName))
   (send display-picture set-label logo)
-  (send field-ingredients set-value "")
+  ;(send field-ingredients set-value (getRecipeAttribute 'ingredients))
   (send field-nutritional-facts set-value "")
   (send field-url set-value ""))
+
+  (iterateCounter)
+  (reset-yummly)
+
+
 
 (define button
   (new button%
        [label "Submit"]
        [vert-margin 0]
-       [horiz-margin 10]
+       [horiz-margin 6]
        [parent frame] 
        [callback callback]))
 
@@ -81,20 +94,51 @@
        (label "------------------------------------------------------------------------------------------------------------------")
        (font (make-object font% 12 'default))))
 
-(define panel
+(define main-panel
   (new vertical-panel%
        (parent frame)
-       [style (list 'vscroll)]
+       (alignment (list 'left 'top))
+       [style (list 'vscroll 'border)]
+       (min-height 10)
+       ))
+
+(define panelll
+  (new horizontal-panel%
+       (parent main-panel)
+       (alignment (list 'left 'top))
+       ;[style (list 'vscroll 'border)]
+       (min-height 10)
+       ))
+
+(define display-picture
+  (new message%
+       (parent panelll)
+       (min-height 10)
+       (label logo)))
+
+(define recipe-name
+  (new message%
+       (parent panelll)
+       (label "Jack Daniels Recipe")
+       (min-width 500)
+       (font (make-object font% 20 'default))))
+
+
+(define panel
+  (new vertical-panel%
+       (parent main-panel)
+       (alignment (list 'left 'center))
+       ;[style (list 'vscroll)]
        ))
 
 ; Recipe name here
-(define recipe-name
-  (new message%
-       (parent panel)
-       (vert-margin 10)
-       (label "Recipe Name:")
-       (min-width 0)
-       (font (make-object font% 12 'default))))
+;(define recipe-name
+;  (new message%
+;       (parent panel)
+;       (vert-margin 10)
+;       (label "Recipe Name:")
+;       (min-width 0)
+;       (font (make-object font% 12 'default))))
 
 ; Required ingredients here
 (define recipe-required
@@ -108,22 +152,21 @@
 (define field-ingredients (new text-field% [label ""] [parent panel] [min-width 100] [min-height 100]))
 
 ; Recipe picture here
-(define recipe-picture
-  (new message%
-       (parent panel)
-       (vert-margin 10)
-       (label "Sample picture:")
-       (min-width 0)
-       (font (make-object font% 12 'default))))
+;(define recipe-picture
+;  (new message%
+;       (parent panel)
+;       (vert-margin 10)
+;       (label "Sample picture:")
+;       (min-width 0)
+;       (font (make-object font% 12 'default))))
 
-(define blank (read-bitmap (get-pure-port (string->url "http://hipsterhub.com/wp-content/uploads/2011/05/blue-pattern-ipad-wallpaper-300x300.jpg"))))
-(define logo (read-bitmap (get-pure-port (string->url "http://racket-lang.org/logo.png"))))
+
 
 ;; Picture of recipe here
-(define display-picture
-  (new message%
-       (parent panel)
-       (label blank)))
+;(define display-picture
+;  (new message%
+;       (parent panel)
+;       (label blank)))
 
 ; Nutritional facts here
 (define recipe-macros
@@ -145,7 +188,8 @@
        (min-width 0)
        (font (make-object font% 12 'default))))
 
-(define field-url (new text-field% [label ""] [parent panel] [min-width 100] [min-height 100]))
+(define field-url (new text-field% [label ""] [parent panel]))
+
 
 ;; display the GUI
 (send frame show #t)
