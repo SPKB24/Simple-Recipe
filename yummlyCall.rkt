@@ -5,12 +5,19 @@
 (require net/url)
 (require json)
 
-(provide yummlySearch add-ingredients addToBlacklist getRecipes)
+(provide yummlySearch add-ingredients addToBlacklist getRecipes getRecipeAttribute)
 
 ;; Search api: http://api.yummly.com/v1/api/recipes?_app_id=app-id&_app_key=app-key&your _search_parameters
 ;;    Get api: http://api.yummly.com/v1/api/recipe/recipe-id?_app_id=YOUR_ID&_app_key=YOUR_APP_KEY
 (define yummlyID (string-append "?_app_id=" appID "&_app_key=" appKey))
 (define yummlySearch (string-append "http://api.yummly.com/v1/api/recipes" yummlyID "&q="))
+(define counter 2)
+(define workingRecipe "")
+
+(define (iterateCounter)
+  (if (= counter 10)
+      (set! counter 1)
+      (set! counter (+ counter 1))))
 
 ;; add-ingredients will take a list of strings to parse and add to the API call url
 ;;   ex. (add-ingredients (list "chicken" "eggs" "cheese"))
@@ -45,8 +52,17 @@
   (begin
     (define recipes (hash-ref (string->jsexpr response) 'matches))
     ;;(printf (jsexpr->string (car recipes)))
-    (parseRecipes recipes 'sourceDisplayName '())))
+    ;;(parseRecipes recipes 'id '())))
+    (getSingleRecipe recipes 1)))
   ;;(hash-ref (cadr recipes) 'sourceDisplayName))
+
+(define (getSingleRecipe recipes current)
+  (if (= counter current)
+     (set! workingRecipe (car recipes))
+     (getSingleRecipe (cdr recipes) (+ current 1))))
+
+(define (getRecipeAttribute attribute)
+  (hash-ref workingRecipe attribute))
 
 ;; This will parse a list of all recipes (10).
 ;;  - recipes: the json list of recipes recieved from getAllRecipes procedure
@@ -57,7 +73,7 @@
   (if (null? recipes)
       result
       (begin
-        (set! result (append result (list (hash-ref (car recipes) toSearch))))
+        (set! result (append result (list (car recipes))))
         (parseRecipes (cdr recipes) toSearch result))))
 
 ;; Mostly working, gets JSON
