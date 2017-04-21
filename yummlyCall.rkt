@@ -10,7 +10,7 @@
 ;; Search api: http://api.yummly.com/v1/api/recipes?_app_id=app-id&_app_key=app-key&your _search_parameters
 ;;    Get api: http://api.yummly.com/v1/api/recipe/recipe-id?_app_id=YOUR_ID&_app_key=YOUR_APP_KEY
 (define yummlyID (string-append "?_app_id=" appID "&_app_key=" appKey))
-(define yummlySearch (string-append "http://api.yummly.com/v1/api/recipes" yummlyID "&q="))
+(define yummlySearch (string-append "http://api.yummly.com/v1/api/recipes" yummlyID))
 (define counter 2)
 (define workingRecipe "")
 
@@ -25,7 +25,8 @@
   (if (null? items)
       yummlySearch
       (begin
-        (set! yummlySearch (string-append yummlySearch "&allowedIngredient[]=" (car items)))
+        (when (not (null? (car items)))
+          (set! yummlySearch (string-append yummlySearch "&allowedIngredient[]=" (car items))))
         (add-ingredients (cdr items)))))
 
 ;; addToBlacklist will take a list of strings to parse and add to the API call url
@@ -34,7 +35,8 @@
   (if (null? items)
       yummlySearch
       (begin
-        (set! yummlySearch (string-append yummlySearch "&excludedIngredient[]=" (car items)))
+        (when (not (null? (car items)))
+          (set! yummlySearch (string-append yummlySearch "&excludedIngredient[]=" (car items))))
         (addToBlacklist (cdr items)))))
 
 ;; Once all information has been added from the GUI to the yummlyURL, call this procedure
