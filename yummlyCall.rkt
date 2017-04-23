@@ -55,11 +55,11 @@
   (define in (get-pure-port (string->url yummlySearch)))
   (define response-string (port->string in))
   (close-input-port in)
-  (getAllRecipes response-string))
+  (getAllMatches response-string))
 
 ;; Once we have a JSON response, this procedure will parse the results and give us
 ;; the information that we are looking for.
-(define (getAllRecipes response)
+(define (getAllMatches response)
   ;; This next line should get a list of recipes, need to loop through them like nobody's biznes
   (begin
     (define recipes (hash-ref (string->jsexpr response) 'matches))
@@ -77,7 +77,7 @@
           (getSingleRecipe (cdr recipes) (+ current 1)))))
 
 ;; This will parse a list of all recipes (10).
-;;  - recipes: the json list of recipes recieved from getAllRecipes procedure
+;;  - recipes: the json list of recipes recieved from getAllMatches procedure
 ;;  - toSearch: a symbol that will parse the data that you want (ex. 'sourceDisplayName)
 ;;  - result: the resulting list with the data from each recipe, should be given empty list
 ;; ex. (parseRecipes recipes 'sourceDisplayName '())
@@ -93,8 +93,58 @@
   (let ([yummlyGet (string-append "http://api.yummly.com/v1/api/recipe/" recipeID yummlyID)])
     (define in (get-pure-port (string->url yummlyGet)))
     (set! recipeDetails (port->string in))
-    (close-input-port in)
-    (string->jsexpr recipeDetails)))
+    (close-input-port in)))
 
 (define (getRecipeAttribute attribute)
-  (hash-ref (string->jsexpr recipeDetails) attribute))
+  (cond
+    [(eq? attribute 'image)
+     (begin
+       (define images (hash-ref (string->jsexpr recipeDetails) 'images))
+       (getImage images))]
+    [(eq? attribute 'nutrition)
+     (begin
+       "theNutrition")]
+    [(eq? attribute 'ingredients)
+     (begin
+       (define ingredients (hash-ref (string->jsexpr recipeDetails) 'ingredientLines))
+       (ingredientsToString ingredients ""))]
+    [else (hash-ref (string->jsexpr recipeDetails) attribute)]))
+
+(define (ingredientsToString ingredientsList stringToReturn)
+  (if (null? ingredientsList)
+      stringToReturn
+      (if (null? (cdr ingredientsList))
+          (ingredientsToString
+           (cdr ingredientsList)
+           (string-append stringToReturn (car ingredientsList)))
+          (ingredientsToString
+           (cdr ingredientsList)
+           (string-append stringToReturn (car ingredientsList) "\n")))))
+
+(define (getImage imageListJson)
+  (hash-ref (car imageListJson) 'hostedMediumUrl))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
