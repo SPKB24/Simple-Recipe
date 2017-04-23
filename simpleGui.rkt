@@ -23,7 +23,7 @@
        (label "Welcome to Simple Recipe")
        (vert-margin 10)
        (min-width 0)
-       (font (make-object font% 15 'default))))
+       (font (make-object font% 18 'default))))
 
 (define (getstr str)
   (printf str))
@@ -69,11 +69,10 @@
   (printf "\n")
   (getRecipes)
   ;(printf (getRecipeAttribute 'recipeName)))
-  (send recipe-name set-label (getRecipeAttribute 'recipeName))
+  (send recipe-name set-label (getRecipeAttribute 'name))
   (send display-picture set-label logo)
   (send field-ingredients set-value (getRecipeAttribute 'ingredients))
-  (send field-nutritional-facts set-value "")
-  (send field-url set-value "https://www.google.com/"))
+  (send field-nutritional-facts set-value 'nutrition))
 
   (iterateCounter)
   (reset-yummly)
@@ -88,11 +87,11 @@
        [parent frame] 
        [callback callback]))
 
-(define horizontal-line
-  (new message%
-       (parent frame)
-       (label "------------------------------------------------------------------------------------------------------------------")
-       (font (make-object font% 12 'default))))
+;(define horizontal-line
+;  (new message%
+;       (parent frame)
+;       (label "------------------------------------------------------------------------------------------------------------------")
+;       (font (make-object font% 12 'default))))
 
 (define main-panel
   (new vertical-panel%
@@ -108,6 +107,7 @@
        (alignment (list 'left 'top))
        ;[style (list 'vscroll 'border)]
        (min-height 10)
+       [stretchable-height #f]
        ))
 
 (define display-picture
@@ -119,7 +119,7 @@
 (define recipe-name
   (new message%
        (parent panelll)
-       (label "Jack Daniels Recipe")
+       (label "Recipe")
        (min-width 500)
        (font (make-object font% 20 'default))))
 
@@ -191,7 +191,8 @@
 (define field-url (new text-field% [label ""] [parent panel]))
 
 (define (url-callback button event)
-  (send-url "https://www.google.com/"))
+  (define new-url (send field-url get-value))
+  (send-url new-url))
 
 (define url-button
   (new button%
