@@ -71,9 +71,9 @@
   ;(printf (getRecipeAttribute 'recipeName)))
   (send recipe-name set-label (getRecipeAttribute 'recipeName))
   (send display-picture set-label logo)
-  ;(send field-ingredients set-value (getRecipeAttribute 'ingredients))
+  (send field-ingredients set-value (getRecipeAttribute 'ingredients))
   (send field-nutritional-facts set-value "")
-  (send field-url set-value ""))
+  (send field-url set-value "https://www.google.com/"))
 
   (iterateCounter)
   (reset-yummly)
@@ -189,6 +189,15 @@
        (font (make-object font% 12 'default))))
 
 (define field-url (new text-field% [label ""] [parent panel]))
+
+(define (url-callback button event)
+  (send-url "https://www.google.com/"))
+
+(define url-button
+  (new button%
+       [label "Open"]
+       [parent panel]
+       [callback url-callback]))
 
 
 ;; display the GUI
