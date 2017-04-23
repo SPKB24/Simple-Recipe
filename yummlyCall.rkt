@@ -5,14 +5,21 @@
 (require net/url)
 (require json)
 
-(provide yummlySearch counter reset-yummly add-ingredients addToBlacklist getRecipes getRecipeAttribute iterateCounter)
+(provide yummlySearch
+         counter
+         reset-yummly
+         add-ingredients
+         addToBlacklist
+         getRecipes
+         getRecipeAttribute
+         iterateCounter)
 
 ;; Search api: http://api.yummly.com/v1/api/recipes?_app_id=app-id&_app_key=app-key&your _search_parameters
 ;;    Get api: http://api.yummly.com/v1/api/recipe/recipe-id?_app_id=YOUR_ID&_app_key=YOUR_APP_KEY
 (define yummlyID (string-append "?_app_id=" appID "&_app_key=" appKey))
 (define yummlySearch (string-append "http://api.yummly.com/v1/api/recipes" yummlyID))
 (define counter 1)
-(define workingRecipe "")
+(define recipeDetails "")
 
 (define (reset-yummly)
   (set! yummlySearch (string-append "http://api.yummly.com/v1/api/recipes" yummlyID)))
@@ -63,13 +70,11 @@
 
 (define (getSingleRecipe recipes current)
   (if (= counter current)
-     (set! workingRecipe (car recipes))
-     (if (null? (cdr recipes))
-         (getSingleRecipe recipes (counter))
-         (getSingleRecipe (cdr recipes) (+ current 1)))))
-
-(define (getRecipeAttribute attribute)
-  (hash-ref workingRecipe attribute))
+      ;; Do something with the recipe (in (car recipes))
+      (getRecipeDetails (hash-ref (car recipes) 'id))
+      (if (null? (cdr recipes))
+          (getSingleRecipe recipes (counter))
+          (getSingleRecipe (cdr recipes) (+ current 1)))))
 
 ;; This will parse a list of all recipes (10).
 ;;  - recipes: the json list of recipes recieved from getAllRecipes procedure
@@ -87,6 +92,9 @@
 (define (getRecipeDetails recipeID)
   (let ([yummlyGet (string-append "http://api.yummly.com/v1/api/recipe/" recipeID yummlyID)])
     (define in (get-pure-port (string->url yummlyGet)))
-    (define recipeInfo-string (port->string in))
+    (set! recipeDetails (port->string in))
     (close-input-port in)
-    (string->jsexpr recipeInfo-string)))
+    (string->jsexpr recipeDetails)))
+
+(define (getRecipeAttribute attribute)
+  (hash-ref (string->jsexpr recipeDetails) attribute))
