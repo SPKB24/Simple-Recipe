@@ -70,9 +70,9 @@
   (getRecipes)
   ;(printf (getRecipeAttribute 'recipeName)))
   (send recipe-name set-label (getRecipeAttribute 'name))
-  (send display-picture set-label logo)
+  (send display-picture set-label (read-bitmap (get-pure-port (string->url (getRecipeAttribute 'image)))))
   (send field-ingredients set-value (getRecipeAttribute 'ingredients))
-  (send field-nutritional-facts set-value 'nutrition))
+  (send field-nutritional-facts set-label (getRecipeAttribute 'nutrition)))
 
   (iterateCounter)
   (reset-yummly)
@@ -114,6 +114,7 @@
   (new message%
        (parent panelll)
        (min-height 10)
+       (min-width 200)
        (label logo)))
 
 (define recipe-name
@@ -121,7 +122,7 @@
        (parent panelll)
        (label "Recipe")
        (min-width 500)
-       (font (make-object font% 20 'default))))
+       (font (make-object font% 15 'default))))
 
 
 (define panel
