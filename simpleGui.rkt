@@ -12,7 +12,7 @@
 
 (define frame (new frame% 
                   [label "Simple Recipe"]
-                  [width 700]
+                  [width 850]
                   [height 1000]
                   ))
 
@@ -63,27 +63,27 @@
       (add-ingredients(regexp-split #px", " (string-append(send field-likes get-value)))))
   (when (not (equal? (car (regexp-split #px", " (string-append(send field-dislikes get-value)))) ""))
       (addToBlacklist(regexp-split #px", " (string-append(send field-dislikes get-value)))))
-  (printf yummlySearch)
-  (printf "\n")
-  (printf (number->string counter))
-  (printf "\n")
+  ;(printf yummlySearch)
+  ;(printf "\n")
+  ;(printf (number->string counter))
+  ;(printf "\n")
   (getRecipes)
   ;(printf (getRecipeAttribute 'recipeName)))
   (send recipe-name set-label (getRecipeAttribute 'name))
   (send display-picture set-label (read-bitmap (get-pure-port (string->url (getRecipeAttribute 'image)))))
   (send field-ingredients set-value (getRecipeAttribute 'ingredients))
-  (send field-nutritional-facts set-label (getRecipeAttribute 'nutrition)))
-
+  (send field-nutritional-facts set-label (getRecipeAttribute 'nutrition))
   (iterateCounter)
-  (reset-yummly)
+  (reset-yummly))
+
 
 
 
 (define button
   (new button%
        [label "Submit"]
-       [vert-margin 0]
-       [horiz-margin 6]
+       [vert-margin 6]
+       [horiz-margin 0]
        [parent frame] 
        [callback callback]))
 
@@ -101,7 +101,7 @@
        (min-height 10)
        ))
 
-(define panelll
+(define horizontal-display-panel
   (new horizontal-panel%
        (parent main-panel)
        (alignment (list 'left 'top))
@@ -112,16 +112,18 @@
 
 (define display-picture
   (new message%
-       (parent panelll)
-       (min-height 10)
+       (parent horizontal-display-panel)
+       (min-height 100)
        (min-width 200)
+       (vert-margin 10)
        (label logo)))
 
 (define recipe-name
   (new message%
-       (parent panelll)
+       (parent horizontal-display-panel)
        (label "Recipe")
        (min-width 500)
+       (vert-margin 10)
        (font (make-object font% 15 'default))))
 
 
@@ -146,7 +148,8 @@
   (new message%
        (parent panel)
        (vert-margin 10)
-       (label "Required ingredients:")
+       (label "Required ingredients")
+       (horiz-margin 10)
        (min-width 0)
        (font (make-object font% 12 'default))))
 
@@ -174,7 +177,8 @@
   (new message%
        (parent panel)
        (vert-margin 10)
-       (label "Nutritional facts:")
+       (label "Nutritional facts")
+       (horiz-margin 10)
        (min-width 0)
        (font (make-object font% 12 'default))))
 
@@ -185,7 +189,8 @@
   (new message%
        (parent panel)
        (vert-margin 10)
-       (label "Instructions URL:")
+       (label "Instructions link")
+       (horiz-margin 10)
        (min-width 0)
        (font (make-object font% 12 'default))))
 
@@ -199,6 +204,7 @@
   (new button%
        [label "Open"]
        [parent panel]
+       (horiz-margin 425)
        [callback url-callback]))
 
 
