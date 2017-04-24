@@ -24,9 +24,9 @@ Staying true to the project name, we will only require the user to enter foods' 
 
 ### Evaluation of Results
 If we can provide these functions for the user, then we will be successful:
-- Allow the user to input food items
-- Provide the user with a unique recipe each time
-- Easy to understand UI
+- We have allowed the user to input food items
+- We have provided the user with a unique recipe each time
+- We have an easy to understand UI
 
 ## Architecture Diagram
 ![Architecture Diagram image](/ArchitectureDiagram.png?raw=true "Architecture Diagram image")
@@ -35,7 +35,7 @@ The first step will be the user entering in individual ingredients that they hav
 
 Once they have filled in the necessary information, we will make an API call to Yummly (using net/url) requesting a JSON file with recipes that best include the inputted ingredients. We will further parse the list to remove any recipes that have items from your blacklist. To handle JSON file parsing, we will use the JSON library.
 
-One we have our final recipes, we will once again use racket/gui to display them for users to choose from.
+One we have our final recipes, we will once again use racket/gui to display them for users to choose from. Information that is displayed includes the ingredeints, nutritional facts, link to the preparation details, a picture of the finished product, and more!
 
 ## Schedule
 ### First Milestone (Sun Apr 9)
