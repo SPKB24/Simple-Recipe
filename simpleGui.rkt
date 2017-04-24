@@ -80,12 +80,11 @@
   (send display-picture set-label (read-bitmap (get-pure-port (string->url (getRecipeAttribute 'image)))))
   (send field-ingredients set-value (getRecipeAttribute 'ingredients))
   (send field-nutritional-facts set-value (getRecipeAttribute 'nutrition))
+  (send field-url set-value (getRecipeAttribute 'url))
 
   (iterateCounter)
   (reset-yummly)
   (printf "Done\n"))
-
-
 
 (define button
   (new button%

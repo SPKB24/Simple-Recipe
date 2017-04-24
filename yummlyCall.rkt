@@ -110,6 +110,8 @@
      (begin
        (define ingredients (hash-ref (string->jsexpr recipeDetails) 'ingredientLines))
        (ingredientsToString ingredients ""))]
+    [(eq? attribute 'url)
+     (hash-ref (hash-ref (string->jsexpr recipeDetails) 'source) 'sourceRecipeUrl)]
     [else (hash-ref (string->jsexpr recipeDetails) attribute)]))
 
 (define (ingredientsToString ingredientsList stringToReturn)
