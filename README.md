@@ -4,26 +4,26 @@
 Our project aims to allow the user to input basic food items they have around and have a recipe generated out of those ingredients. The recipe will be random each time with a link provided to the recipe.
 
 ### Analysis
-- We will use recursion to parse the JSON to find recipes that best fit the users needs.
-- map/filter/reduce will be used to further cut down our list of recipes as needed. 
-- We will have seperate functions to request, parse, and display data. It makes for cleaner and scalable code.
+- We used recursion to parse the JSON to find recipes that best fit the users needs.
+- We split up our code into seperate functions to request, parse, and display data. It makes for cleaner and scalable code.
 
 ### External Technologies
-You are encouraged to develop a project that connects to external systems. For example, this includes systems that:
-- We plan to use yummly's api to look up foods https://developer.yummly.com/documentation
-- Racket GUI library. Will be used to display information to user.
-- Racket JSON library. Will be used to get information from data sets.
+- Yummly: Yummly's api to look up foods and recipes: https://developer.yummly.com/documentation
+- Racket GUI library. Used to create a clean, simple UI to display information to users.
+- Racket JSON library. Used to parse the JSON responses from Yummly API Calls.
 
 ### Data Sets or other Source Materials
-For our data set we plan to use yummly. 
+For our data set we plan to use yummly.
 - https://developer.yummly.com/documentation
-Using this data we will be able to provide more options for the user. This data will help provide the user with a more diverse recipe list and make our lives easier. 
+Using this data we will be able to provide more options for the user. This data will help provide the user with a more diverse recipe list and make our lives easier.
 
 ### Deliverable and Demonstration
-Upon completion of the project we should be able to give a live demo of it. To be more explicit, the final product will allow the user to input food items they have in a simple GUI. After that, they will click a button and get a random recipe that includes the ingredients they entered. This will also come with a link to the website that contains the recipe. During the live demo, people will be able to come up if they like to try it out.
+Upon completion of the project we should be able to give a live demo of it.
+
+Staying true to the project name, we will only require the user to enter foods' that they like, and foods' that they dislike, then click submit to pull up a recipe which best fits their inputs. To get another recipe, just click submit again.
 
 ### Evaluation of Results
-If we can provide these functions for the user, then we will be successful: 
+If we can provide these functions for the user, then we will be successful:
 - Allow the user to input food items
 - Provide the user with a unique recipe each time
 - Easy to understand UI
