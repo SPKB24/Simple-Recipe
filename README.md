@@ -13,12 +13,10 @@ Our project aims to allow the user to input basic food items they have around an
 - Racket JSON library. Used to parse the JSON responses from Yummly API Calls.
 
 ### Data Sets or other Source Materials
-For our data set we plan to use yummly.
-- https://developer.yummly.com/documentation
-Using this data we will be able to provide more options for the user. This data will help provide the user with a more diverse recipe list and make our lives easier.
+We are using Yummly's large data set of over 2 million recipes. With this data, we will be able to provide options for the user. This data will help provide the user with a more diverse recipe list and more accurate recommendations.
 
 ### Deliverable and Demonstration
-Upon completion of the project we should be able to give a live demo of it.
+Upon completion of the project we will be able to give a live demo of it.
 
 Staying true to the project name, we will only require the user to enter foods' that they like, and foods' that they dislike, then click submit to pull up a recipe which best fits their inputs. To get another recipe, just click submit again.
 
@@ -43,7 +41,6 @@ One we have our final recipes, we will once again use racket/gui to display them
 - Time permitted, we will also begin to work on the GUI.
 
 ### Second Milestone (Sun Apr 16)
-Which portion of the work will be completed (and committed to Github) by this day?
 - We will work on our GUI. More specifically, we will let users enter their ingredients and blacklist ingredients, and use those to further parse the JSON.
 - We will also display the parsed items in our GUI.
 
