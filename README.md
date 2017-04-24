@@ -57,5 +57,5 @@ Which portion of the work will be completed (and committed to Github) by this da
 - Other miscellaneous tasks
 
 ### Sohit Pal @SPKB24
-- Setup GUI
-- Help with handling API call to Yummly and parsing the resulting JSON
+- Handled Yummly API call and response
+- Parsed the response to provide data for the GUI
