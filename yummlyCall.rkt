@@ -103,7 +103,9 @@
        (getImage images))]
     [(eq? attribute 'nutrition)
      (begin
-       "theNutrition")]
+       (define nutritionalInfo (hash-ref (string->jsexpr recipeDetails) 'nutritionEstimates))
+       ;;(printf (jsexpr->string nutritionalInfo))
+       (nutritionToString nutritionalInfo ""))]
     [(eq? attribute 'ingredients)
      (begin
        (define ingredients (hash-ref (string->jsexpr recipeDetails) 'ingredientLines))
@@ -120,6 +122,25 @@
           (ingredientsToString
            (cdr ingredientsList)
            (string-append stringToReturn (car ingredientsList) "\n")))))
+
+(define nutritionWeCareAbout '("ENERC_KJ" "CHOCDF" "PROCNT" "SUGAR" "NA" "ENERC_KJ"))
+(define (nutritionToString infoList stringToReturn)
+  (if (null? infoList)
+      stringToReturn
+      (let ([nutritionName (hash-ref (car infoList) 'attribute)])
+        (if (careAboutThis? nutritionName nutritionWeCareAbout)
+            (let ([nutriDesc  (hash-ref (car infoList) 'description)]
+                  [nutriValue (hash-ref (car infoList) 'value)]
+                  [nutriUnits (hash-ref (hash-ref (car infoList) 'unit) 'plural)])
+              (nutritionToString (cdr infoList) (string-append stringToReturn nutriDesc ": " (number->string nutriValue) " " nutriUnits "\n")))
+            (nutritionToString (cdr infoList) stringToReturn)))))
+
+(define (careAboutThis? careItem careList)
+  (if (null? careList)
+      #f
+      (if (equal? careItem (car careList))
+          #t
+          (careAboutThis? careItem (cdr careList)))))
 
 (define (getImage imageListJson)
   (hash-ref (car imageListJson) 'hostedMediumUrl))
