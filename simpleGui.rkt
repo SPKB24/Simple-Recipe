@@ -10,7 +10,7 @@
 (define blank (read-bitmap (get-pure-port (string->url "http://hipsterhub.com/wp-content/uploads/2011/05/blue-pattern-ipad-wallpaper-300x300.jpg"))))
 (define logo (read-bitmap (get-pure-port (string->url "http://racket-lang.org/logo.png"))))
 
-(define frame (new frame% 
+(define frame (new frame%
                   [label "Simple Recipe"]
                   [width 850]
                   [height 1000]
@@ -63,19 +63,27 @@
       (add-ingredients(regexp-split #px", " (string-append(send field-likes get-value)))))
   (when (not (equal? (car (regexp-split #px", " (string-append(send field-dislikes get-value)))) ""))
       (addToBlacklist(regexp-split #px", " (string-append(send field-dislikes get-value)))))
+
+  (getRecipes)
+
   ;(printf yummlySearch)
   ;(printf "\n")
-  ;(printf (number->string counter))
-  ;(printf "\n")
-  (getRecipes)
+  (printf (number->string counter))
+  (printf "\n")
+  (printf (getRecipeAttribute 'ingredients))
+  (printf "\n")
+  (printf (getRecipeAttribute 'image))
+  (printf "\n")
+
   ;(printf (getRecipeAttribute 'recipeName)))
   (send recipe-name set-label (getRecipeAttribute 'name))
   (send display-picture set-label (read-bitmap (get-pure-port (string->url (getRecipeAttribute 'image)))))
   (send field-ingredients set-value (getRecipeAttribute 'ingredients))
-  (send field-nutritional-facts set-label (getRecipeAttribute 'nutrition))
-  (iterateCounter)
-  (reset-yummly))
+  (send field-nutritional-facts set-value (getRecipeAttribute 'nutrition))
 
+  (iterateCounter)
+  (reset-yummly)
+  (printf "Done\n"))
 
 
 
@@ -84,7 +92,7 @@
        [label "Submit"]
        [vert-margin 6]
        [horiz-margin 0]
-       [parent frame] 
+       [parent frame]
        [callback callback]))
 
 ;(define horizontal-line
