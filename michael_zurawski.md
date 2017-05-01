@@ -1,4 +1,4 @@
-# Simple-Recipe
+# Simple-Recipe GUI
 
 ## Mike Zurawski
 ## April 30, 2016
