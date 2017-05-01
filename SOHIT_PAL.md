@@ -63,19 +63,19 @@ The following code creates creates the Yummly API call URL through appending mul
 
 A couple of things are happening in the code above:
 * Protecting my API Key
- * I wanted to keep my API key information safe, so I stored it in a seperate
+  * I wanted to keep my API key information safe, so I stored it in a seperate
  racket file called 'yummlyAPI.rkt'. I used the provide procedure to let me
  access the information in my yummlyCall.rkt file (which is where all of the
    backend code lives).
 * Concatenating the url string with the additional API information
- * Once I have the API information stored in the yummlyID variable, I simply used
+  * Once I have the API information stored in the yummlyID variable, I simply used
  string-append procedure to append "http://api.yummly.com/v1/api/recipes" to my
  API key information.
 * Using add-ingredients procedure to append further information to the url
- * Finally, I want to add the ingredients to the url so that Yummly knows what
+  * Finally, I want to add the ingredients to the url so that Yummly knows what
  kinds of recipes I am looking for. To accomplish this, I created the
  add-ingredients procedure.
- * add-ingredients takes a list of strings as a parameter. I chose this because
+  * add-ingredients takes a list of strings as a parameter. I chose this because
  it would be easy to get a list of strings from the GUI, and pass it here. Once
  received, it parses each, and adds each individual ingredient to the url.
 
