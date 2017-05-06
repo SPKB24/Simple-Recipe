@@ -11,7 +11,7 @@ Working with Michael Zurawski, we were able to create an simple, easy to use GUI
 to access, parse, and display the most relevant information to the user, powered
 by Yummly's online database of over 2 million recipes.
 
-To use Simple-Recipe, simply enter comma-separated ingedients into the two input
+To use Simple-Recipe, simply enter comma-separated ingredients into the two input
 fields at the top of the GUI and click Submit. This will trigger a callback
 function to call the Yummly API and display the data as needed.
 
